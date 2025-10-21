@@ -1,7 +1,9 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
-
+from Channel_SpatialAttentionGate import Channel_SpatialAttentionGate
+from MultiAttentionMamba import MultiAttentionMamba
+from AxialResidualBlock import AxialResidualBlock
 class UnetDsv3(nn.Module):
     def __init__(self, in_size, out_size, scale_factor):
         super(UnetDsv3, self).__init__()
@@ -22,15 +24,13 @@ class DA_MambaNet(nn.Module):
         self.e4 = MultiAttentionMamba(128, 256, 32, 24)
         self.e5 = MultiAttentionMamba(256, 512, 16, 12)
 
-        """Skip connection"""
-        self.s1 = CBAM(gate_channels = 32)
-        self.s2 = CBAM(gate_channels = 64)
-        self.s3 = CBAM(gate_channels = 128)
-        self.s4 = CBAM(gate_channels = 256)
-        self.s5 = CBAM(gate_channels = 512)
-
-        """Bottle Neck"""
-        # self.b5 = PCAPSA_Mamba(512)
+        """Skip Connection"""
+        self.d5 = Channel_SpatialAttentionGate(512, 512, 256)
+        self.d4 = Channel_SpatialAttentionGate(256, 256, 128)
+        self.d3 = Channel_SpatialAttentionGate(128, 128, 64)
+        self.d2 = Channel_SpatialAttentionGate(64, 64, 32)
+        self.d1 = Channel_SpatialAttentionGate(32, 32, 16)
+        """Bottleneck"""
         self.b5 = SKUnit(512, 512, 512, M=2, G=16, r=2, stride=1, L=32)
         """Decoder"""
         self.d5 = AxialResidualBlock(512, 512, 256)
