@@ -1,7 +1,6 @@
 # AttentionMambaSegmentation
 Our source code will be coming soon! 
 ## Project Structure
-## Project Structure
 
 ```
 AttentionMambaSegmentation/
