@@ -1,7 +1,10 @@
 # AttentionMambaSegmentation
 Our source code will be coming soon! 
 ## Project Structure
-"""AttentionMambaSegmentation/
+## Project Structure
+
+```
+AttentionMambaSegmentation/
 ├── README.md                       # Project overview, setup, and usage guide
 ├── requirements.txt                # Dependencies (torch, monai, timm, mamba-ssm, albumentations, etc.)
 ├── LICENSE
@@ -59,8 +62,9 @@ Our source code will be coming soon!
 │       └── run_chestxray.sh
 │
 └── results/                        # Outputs of experiments
-    ├── logs/
-    ├── checkpoints/
-    ├── metrics/
-    └── figures/
-"""
+|   ├── logs/
+|   ├── checkpoints/
+|   ├── metrics/
+|   └── figures/
+└── LICENSE
+```
