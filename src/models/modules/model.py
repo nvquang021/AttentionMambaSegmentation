@@ -10,7 +10,6 @@ from src.models.modules.skipconnection import scale_atten_convblock
 class DA_MambaNet(nn.Module):
     def __init__(self):
         super().__init__()
-        # self.qseme = QSEME(out_c=16)
         self.pw_in = nn.Conv2d(3, 16, kernel_size=1)
         self.sk_in = SKConv_7(16, M=2, G=16, r=4, stride=1 ,L=32)
         """Encoder"""
